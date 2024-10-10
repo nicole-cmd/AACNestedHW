@@ -1,21 +1,29 @@
+import java.security.KeyPair;
 import java.util.NoSuchElementException;
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import edu.grinnell.csc207.util.AssociativeArray;
 
 /**
  * Represents the mappings for a single category of items that should
  * be displayed
  * 
- * @author Catie Baker & YOUR NAME HERE
+ * @author Catie Baker & Nicole Gorrell
  *
  */
 public class AACCategory implements AACPage {
 
+	String catName;
+	AssociativeArray<String, String> map;
+	int contents;
 	
 	/**
 	 * Creates a new empty category with the given name
 	 * @param name the name of the category
 	 */
 	public AACCategory(String name) {
-
+		this.catName = name;
+		this.map = null; 
+		this.contents = 0;
 	}
 	
 	/**
@@ -24,7 +32,12 @@ public class AACCategory implements AACPage {
 	 * @param text the text that image should speak
 	 */
 	public void addItem(String imageLoc, String text) {
-
+		try {
+		this.map.set(imageLoc, text);
+		this.contents++;
+		} catch(Exception NullKeyException) {
+			new edu.grinnell.csc207.util.NullKeyException("Image location is null.");
+		} // try/catch
 	}
 
 	/**
@@ -33,7 +46,12 @@ public class AACCategory implements AACPage {
 	 * it should return an empty array
 	 */
 	public String[] getImageLocs() {
-		return null;
+		String[] images = {};
+
+		for(int i = 0; i < this.contents; i++) {
+			// images[i] = this.map[i];
+		} // for
+		return new String[] { "img/food/icons8-french-fries-96.png", "img/food/icons8-watermelon-96.png" }; // STUB
 	}
 
 	/**
@@ -41,7 +59,7 @@ public class AACCategory implements AACPage {
 	 * @return the name of the category
 	 */
 	public String getCategory() {
-		return "";
+		return "food";  // STUB
 	}
 
 	/**
@@ -52,7 +70,7 @@ public class AACCategory implements AACPage {
 	 * 		   category
 	 */
 	public String select(String imageLoc) {
-		return "";
+		return "television";  // STUB
 	}
 
 	/**
