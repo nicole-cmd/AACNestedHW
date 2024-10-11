@@ -21,9 +21,9 @@ public class AACCategory implements AACPage {
 	 * @param name the name of the category
 	 */
 	public AACCategory(String name) {
-		this.catName = name;
-		this.map = null; 
-		this.contents = 0;
+		// this.catName = name;
+		// this.map = null; 
+		// this.contents = 0;
 	}
 	
 	/**
@@ -32,12 +32,12 @@ public class AACCategory implements AACPage {
 	 * @param text the text that image should speak
 	 */
 	public void addItem(String imageLoc, String text) {
-		try {
-		this.map.set(imageLoc, text);
-		this.contents++;
-		} catch(Exception NullKeyException) {
-			new edu.grinnell.csc207.util.NullKeyException("Image location is null.");
-		} // try/catch
+		// try {
+		// this.map.set(imageLoc, text);
+		// this.contents++;
+		// } catch(Exception NullKeyException) {
+		// 	new edu.grinnell.csc207.util.NullKeyException("Image location is null.");
+		// } // try/catch
 	}
 
 	/**
