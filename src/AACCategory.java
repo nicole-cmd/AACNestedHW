@@ -13,7 +13,7 @@ import edu.grinnell.csc207.util.KVPair;
  * @author Catie Baker & Nicole Gorrell
  *
  */
-public class AACCategory extends KVPair<String, String> implements AACPage {
+public class AACCategory extends AssociativeArray<String, String> implements AACPage {
 	// +--------+------------------------------------------------------
 	// | Fields |
 	// +--------+
@@ -31,8 +31,7 @@ public class AACCategory extends KVPair<String, String> implements AACPage {
 	 * 
 	 * @param name the name of the category
 	 */
-	public AACCategory(String name, String key, String val) {
-		super(key, val);
+	public AACCategory(String name) {
 		this.catName = name;
 		this.map = new AssociativeArray<String, String>(); // uninitialized
 		this.list = null;
