@@ -72,6 +72,7 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 		for (int i = 0; i < this.map.size(); i++) {
 			images[i] = this.list[i].key;
 		} // for
+		
 		return images;
 	} // getImageLocs()
 

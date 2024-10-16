@@ -1,3 +1,11 @@
+import java.util.NoSuchElementException;
+
+import javax.speech.EngineException;
+
+import edu.grinnell.csc207.util.AssociativeArray;
+import edu.grinnell.csc207.util.KVPair;
+import edu.grinnell.csc207.util.KeyNotFoundException;
+
 /**
  * Creates a set of mappings of an AAC that has two levels,
  * one for categories and then within each category, it has
@@ -10,7 +18,20 @@
  *
  */
 public class AACMappings implements AACPage {
-	
+	// +--------+------------------------------------------------------
+	// | Fields |
+	// +--------+
+
+	AACCategory current; // keep track of current category
+	AssociativeArray<String, AACCategory> mapToCat; // map (file)names to categories 
+
+	// gets wrapped, what will perform most method operations
+	AssociativeArray item;
+
+	// +--------------+------------------------------------------------
+	// | Constructors |
+	// +--------------+
+
 	/**
 	 * Creates a set of mappings for the AAC based on the provided
 	 * file. The file is read in to create categories and fill each
@@ -32,9 +53,15 @@ public class AACMappings implements AACPage {
 	 * @param filename the name of the file that stores the mapping information
 	 */
 	public AACMappings(String filename) {
-
-	}
+		this.current = new AACCategory(filename);
+		this.mapToCat = new AssociativeArray<String, AACCategory>(); // (file)names to categories
+		this.item = new AssociativeArray<String, AACCategory>();
+	} // AACMappings(String)
 	
+	// +---------+--------------------------------------------
+	// | Methods |
+	// +---------+
+
 	/**
 	 * Given the image location selected, it determines the action to be
 	 * taken. This can be updating the information that should be displayed
@@ -49,9 +76,25 @@ public class AACMappings implements AACPage {
 	 * @throws NoSuchElementException if the image provided is not in the current 
 	 * category
 	 */
-	public String select(String imageLoc) {
-		return "television";  // STUB
-	}
+	public String select(String imageLoc) throws NoSuchElementException {
+		if (this.mapToCat.hasKey(imageLoc)) {
+			this.current.catName = imageLoc;
+			return ""; // uh
+		} // if
+		
+		try {
+			if (this.current.hasImage(imageLoc)) {
+				return this.current.select(imageLoc);
+			} // if
+		} catch (Exception NoSuchElementException) {
+			// do nothing
+		} // try/catch
+
+		return "fix";
+	
+		// return (String) this.item.select(imageLoc);
+		// throw new edu.grinnell.csc207.util.KeyNotFoundException.KeyNotFoundException();
+	} // select(String)
 	
 	/**
 	 * Provides an array of all the images in the current category
@@ -125,6 +168,10 @@ public class AACMappings implements AACPage {
 	 * can be displayed, false otherwise
 	 */
 	public boolean hasImage(String imageLoc) {
+		if (this.item.hasImage(imageLoc)) {
+			return true;
+		}
+		
 		return false;
-	}
+	} // hasImage(String)
 }

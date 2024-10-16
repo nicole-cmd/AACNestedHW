@@ -264,4 +264,32 @@ public class AssociativeArray<K, V> {
     throw new KeyNotFoundException(); // else - when we've searched through whole array and not found the key
   } // find(K)
 
+  // +--------------------------------+---------------------------------------------
+  // | Methods to Support AACMappings |
+  // +--------------------------------+
+  
+  /**
+   * A renamed get method.
+   * 
+   * @param
+   *    key
+   * @return
+   *    The value of type V at the specified key.
+   * @throws KeyNotFoundException
+   */
+  public V select(K key) throws KeyNotFoundException {
+    return this.get(key);
+  } // select(K)
+
+  /**
+   * A renamed hasKey method.
+   * 
+   * @param 
+   *    key
+   * @return
+   *    true if the key exists in the associative array; false otherwise.
+   */
+  public boolean hasImage(K key) {
+    return this.hasKey(key);
+  }
 } // class AssociativeArray
