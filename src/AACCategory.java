@@ -34,7 +34,7 @@ public class AACCategory extends KVPair<String, String> implements AACPage {
 	public AACCategory(String name, String key, String val) {
 		super(key, val);
 		this.catName = name;
-		this.map = new AssociativeArray<String, String>(); // uninitialized; or alma told me to have it be null too
+		this.map = new AssociativeArray<String, String>(); // uninitialized
 		this.list = null;
 	} // AACCategory(String)
 
@@ -54,7 +54,12 @@ public class AACCategory extends KVPair<String, String> implements AACPage {
 		} catch (Exception NullKeyException) {
 			new edu.grinnell.csc207.util.NullKeyException("Image location is null.");
 		} // try/catch
-	} // addItem(String, String)
+
+		// add key/val pair to list to keep track of how many image/text maps we add
+		this.list[this.list.length - 1].key = imageLoc;
+		this.list[this.list.length - 1].val = text;
+
+	} // addItem(String, Str ing)
 
 	/**
 	 * Returns an array of all the images in the category
@@ -97,7 +102,7 @@ public class AACCategory extends KVPair<String, String> implements AACPage {
 			} // try/catch
 		} // if
 		throw new NoSuchElementException("This image is not in this category.");
-	} // COME BACK TO THIS ONE
+	} // select(imageLoc)
 
 	/**
 	 * Determines if the provided images is stored in the category
