@@ -17,14 +17,14 @@ public class KVPair<K, V> {
   /**
    * The key.
    */
-  public K key;
+  K key;
   
   //NEED TO FIX and in AACCategory - not good encapsulation
 
   /**
    * The value.
    */
-  public V val;
+  V val;
 
   // +--------------+------------------------------------------------
   // | Constructors |
