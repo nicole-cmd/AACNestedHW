@@ -11,3 +11,4 @@ ACKNOWLEDGEMENTS:
 - Alma Ordaz offered guidance on implementing the AACCategory and AACMappings constructors
 - "Reusing and generalizing code with inheritance" reading (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/inheritance.html)
 - "Wrapping objects and classes" reading (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/wrappers.html)
+- Java String class documentation (https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html)
