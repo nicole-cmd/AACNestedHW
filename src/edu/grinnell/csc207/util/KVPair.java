@@ -33,7 +33,7 @@ public class KVPair<K, V> {
   /**
    * Create an empty key/value pair.
    */
-  KVPair() {
+  public KVPair() {
     this(null, null);
   } // KVPair()
 
@@ -45,7 +45,7 @@ public class KVPair<K, V> {
    * @param pairValue
    *   The value of the new pair.
    */
-  KVPair(K pairKey, V pairValue) {
+  public KVPair(K pairKey, V pairValue) {
     this.key = pairKey;
     this.val = pairValue;
   } // KVPair(K,V)
