@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 import javax.speech.EngineException;
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import edu.grinnell.csc207.util.AssociativeArray;
-import edu.grinnell.csc207.util.KVPair;
 
 /**
  * Represents the mappings for a single category of items that should
@@ -20,7 +19,7 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 
 	String catName; // category name
 	AssociativeArray<String, String> map; // overall list mapping added images
-	KVPair<String, String>[] list; // list of images within a category (each of which contain location and words)
+	String[] keyList; // list of image locations within a category
 
 	// +--------------+------------------------------------------------
 	// | Constructors |
@@ -34,7 +33,7 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 	public AACCategory(String name) {
 		this.catName = name;
 		this.map = new AssociativeArray<String, String>(); // uninitialized
-		this.list = null;
+		this.keyList = null;
 	} // AACCategory(String)
 
 	// +---------+--------------------------------------------
@@ -54,11 +53,10 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 			new edu.grinnell.csc207.util.NullKeyException("Image location is null.");
 		} // try/catch
 
-		// add key/val pair to list to keep track of how many image/text maps we add
-		this.list[this.list.length - 1].key = imageLoc;
-		this.list[this.list.length - 1].val = text;
+		// add key to keyList to keep track of how many image locations we add
+		this.keyList[this.keyList.length - 1] = imageLoc;
 
-	} // addItem(String, Str ing)
+	} // addItem(String, String)
 
 	/**
 	 * Returns an array of all the images in the category
@@ -67,13 +65,7 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 	 *         it should return an empty array
 	 */
 	public String[] getImageLocs() {
-		String[] images = {};
-
-		for (int i = 0; i < this.map.size(); i++) {
-			images[i] = this.list[i].key;
-		} // for
-		
-		return images;
+		return this.keyList;
 	} // getImageLocs()
 
 	/**
@@ -111,8 +103,9 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 	 * @return true if it is in the category, false otherwise
 	 */
 	public boolean hasImage(String imageLoc) {
-		for (int i = 0; i < this.map.size(); i++) { // cycles through array to see if there is a matching image location
-			if (this.list[i].key == imageLoc) {
+		// cycle through String array to see if there is a matching image location
+		for (int i = 0; i < this.map.size(); i++) { 
+			if (this.keyList[i] == imageLoc) {
 				return true;
 			} // if
 		} // for

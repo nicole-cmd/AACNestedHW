@@ -77,10 +77,14 @@ public class AACMappings implements AACPage {
 	 * category
 	 */
 	public String select(String imageLoc) throws NoSuchElementException {
-		if (this.mapToCat.hasKey(imageLoc)) {
-			this.current.catName = imageLoc;
-			return ""; // uh
-		} // if
+		try {
+			if (this.mapToCat.hasKey(imageLoc)) {
+				this.current.catName = imageLoc;
+				return this.current.map.get(imageLoc); // uh
+			} // if
+		} catch (Exception KeyNotFoundException) {
+			// do nothing
+		} // try/catch
 		
 		try {
 			if (this.current.hasImage(imageLoc)) {
@@ -90,10 +94,14 @@ public class AACMappings implements AACPage {
 			// do nothing
 		} // try/catch
 
-		return "fix";
-	
-		// return (String) this.item.select(imageLoc);
-		// throw new edu.grinnell.csc207.util.KeyNotFoundException.KeyNotFoundException();
+		// so would this be more general, to work on both directory and category levels?
+		try {
+			return (String) this.item.select(imageLoc);
+		} catch (Exception KeyNotFoundException) {
+			// do nothing
+		} // try/catch
+
+		throw new NoSuchElementException("The provided image is not in this category.");
 	} // select(String)
 	
 	/**
@@ -102,7 +110,7 @@ public class AACMappings implements AACPage {
 	 * it should return an empty array
 	 */
 	public String[] getImageLocs() {
-		return new String[] { "img/food/icons8-french-fries-96.png", "img/food/icons8-watermelon-96.png" }; // STUB
+		return this.current.getImageLocs();
 	} // getImageLocs()
 	
 	
@@ -111,8 +119,9 @@ public class AACMappings implements AACPage {
 	 * category
 	 */
 	public void reset() {
-
-	}
+		this.current.catName = "";
+		return;
+	} // reset()
 	
 	
 	/**
@@ -136,8 +145,21 @@ public class AACMappings implements AACPage {
 	 * AAC mapping to
 	 */
 	public void writeToFile(String filename) {
-		
-	}
+		// AACCategory look = this.mapToCat.get(filename);
+
+		// filename += look.keyList; //what is the category location...
+		// filename += " ";
+		// filename += look.getCategory();
+		// filename += '\n';
+		// filename += "> ";
+
+		// look.getImageLocs();
+		// for (int i = 0; i < this.mapToCat.size(); i++) {
+		// 	filename += this.mapToCat.val.keyList[i];
+		// 	filename += " ";
+		// 	filename += this.mapToCat.select(filename);
+		// } // for
+	} // writeToFile(String)
 	
 	/**
 	 * Adds the mapping to the current category (or the default category if
@@ -146,8 +168,16 @@ public class AACMappings implements AACPage {
 	 * @param text the text associated with the image
 	 */
 	public void addItem(String imageLoc, String text) {
+		try {
+			if (this.current.catName == "") {
+				this.item.set(imageLoc, text);
+			} // if
+		} catch (Exception KeyNotFoundException) {
+			// do nothing
+		} // try/catch
 		
-	}
+		return;
+	} // addItem(String, String)
 
 
 	/**
@@ -156,8 +186,8 @@ public class AACMappings implements AACPage {
 	 * on the default category
 	 */
 	public String getCategory() {
-		return "food";  // STUB
-	}
+		return this.current.catName;
+	} // getCategory()
 
 
 	/**
@@ -170,7 +200,7 @@ public class AACMappings implements AACPage {
 	public boolean hasImage(String imageLoc) {
 		if (this.item.hasImage(imageLoc)) {
 			return true;
-		}
+		} // if
 		
 		return false;
 	} // hasImage(String)
