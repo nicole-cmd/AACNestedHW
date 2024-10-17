@@ -12,3 +12,9 @@ ACKNOWLEDGEMENTS:
 - "Reusing and generalizing code with inheritance" reading (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/inheritance.html)
 - "Wrapping objects and classes" reading (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/wrappers.html)
 - Java String class documentation (https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html)
+- "Different Ways of Reading a Text File in Java" (https://www.geeksforgeeks.org/different-ways-reading-text-file-java/)
+- "Java Program to Write into a File" (https://www.geeksforgeeks.org/java-program-to-write-into-a-file/)
+- Joshua Delarosa
+- "Wrappers and classes" reading (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/wrappers.html)
+- "Simple Java for C Programmers" reading (https://rebelsky.cs.grinnell.edu/Courses/CSC207/2024Fa/readings/simple-java-c.html)
+- Java Scanner class documentation (https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Scanner.html)

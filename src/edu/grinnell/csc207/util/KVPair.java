@@ -18,8 +18,6 @@ public class KVPair<K, V> {
    * The key.
    */
   K key;
-  
-  //NEED TO FIX and in AACCategory - not good encapsulation
 
   /**
    * The value.
