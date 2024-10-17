@@ -1,11 +1,8 @@
 import java.io.*;
-import java.util.Scanner;
 import java.util.NoSuchElementException;
 import edu.grinnell.csc207.util.*;
-
+import java.io.PrintWriter;
 import javax.speech.EngineException;
-
-import edu.grinnell.csc207.util.*;
 
 /**
  * Creates a set of mappings of an AAC that has two levels,
@@ -141,7 +138,6 @@ public class AACMappings implements AACPage {
 		return;
 	} // reset()
 	
-	
 	/**
 	 * Writes the ACC mappings stored to a file. The file is formatted as
 	 * the text location of the category followed by the text name of the
@@ -163,12 +159,27 @@ public class AACMappings implements AACPage {
 	 * AAC mapping to
 	 */
 	public void writeToFile(String filename) {
-		File outFile = new File(filename);
-		if (outFile.exists()) {
-			/* do something */
-		} else {
-			/* continue */
-		}
+		try {
+			PrintWriter pen = new PrintWriter(filename);
+
+			// list for all categories in top directory
+			String[] topList = this.mapToCat.get(this.topDirectory.catName).getImageLocs();
+
+			// list of all images in current category
+			String[] catList = this.mapToCat.get(this.current.catName).getImageLocs();
+
+			// iterate through top directory, then into each category, to print category and image information to file
+			for (String s : topList) {
+				pen.println(this.mapToCat.get(s) + " " + this.mapToCat.get(s).catName);
+
+				for (String i : catList) {
+					pen.println(">" + this.mapToCat.get(i) + " " + this.mapToCat.get(this.current.catName).select(i));
+				} // for
+			} // for
+
+		} catch (Exception FileNotFoundException) {
+			new FileNotFoundException("Could not load " + filename);
+		} // try/catch
 	} // writeToFile(String)
 	
 	/**
@@ -188,10 +199,7 @@ public class AACMappings implements AACPage {
 		} catch (Exception KeyNotFoundException) {
 			new KeyNotFoundException("Could not check category levels.");
 		} // try/catch
-		
-		return;
 	} // addItem(String, String)
-
 
 	/**
 	 * Gets the name of the current category
@@ -208,7 +216,6 @@ public class AACMappings implements AACPage {
 
 		return currentName;
 	} // getCategory()
-
 
 	/**
 	 * Determines if the provided image is in the set of images that
