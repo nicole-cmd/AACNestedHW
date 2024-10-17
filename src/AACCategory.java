@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 
 import javax.speech.EngineException;
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
-import edu.grinnell.csc207.util.AssociativeArray;
+import edu.grinnell.csc207.util.*;
 
 /**
  * Represents the mappings for a single category of items that should
@@ -19,7 +19,7 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 
 	String catName; // category name
 	AssociativeArray<String, String> map; // overall list mapping added images
-	String[] keyList; // list of image locations within a category
+	String[] keyList = {}; // list of image locations within a category
 
 	// +--------------+------------------------------------------------
 	// | Constructors |
@@ -33,7 +33,6 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 	public AACCategory(String name) {
 		this.catName = name;
 		this.map = new AssociativeArray<String, String>(); // uninitialized
-		this.keyList = null;
 	} // AACCategory(String)
 
 	// +---------+--------------------------------------------
@@ -50,7 +49,7 @@ public class AACCategory extends AssociativeArray<String, String> implements AAC
 		try {
 			this.map.set(imageLoc, text);
 		} catch (Exception NullKeyException) {
-			new edu.grinnell.csc207.util.NullKeyException("Image location is null.");
+			new NullKeyException("The image has no designated location.");
 		} // try/catch
 
 		// add key to keyList to keep track of how many image locations we add
